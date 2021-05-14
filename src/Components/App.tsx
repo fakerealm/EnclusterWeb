@@ -1,11 +1,24 @@
 import React from 'react';
 import Navbar from './Navbar';
+import Style from './style';
+// Import Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+// importing buttons from react bootstrap 
+import Button from 'react-bootstrap/Button';
+// Importing The style sheet
+import "./style.css";
+
+
+
 
 function App() {
   return (
     <div className="app">
       <Navbar />
-      <h1>Welcome to NotesCluster</h1>
+     
+
+      
+      <h1 className="Main-heading">Welcome to NotesCluster</h1>
       <h2>Lorem Ipsum Doler sit amet</h2>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -16,7 +29,8 @@ function App() {
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum.
       </p>
-      <button className="sign-up">Sign up today!</button>
+      <Style />
+      <Button variant="primary">Sign up</Button>{' '}
     </div>
   );
 }
