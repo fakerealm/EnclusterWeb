@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Nav({ color }) {
+export default function Nav({ color, showSecondaryNav }) {
   const [toggleMobile, setToggleMobile] = useState(false);
   return (
     <div className={color}>
@@ -11,7 +11,7 @@ export default function Nav({ color }) {
               {/* logo */}
               <div>
                 <a
-                  href="#"
+                  href="/"
                   className="flex items-center py-5 px-2 text-gray-100 hover:text-gray-300"
                 >
                   <span className="font-bold text-2xl">EnCluster</span>
@@ -27,21 +27,22 @@ export default function Nav({ color }) {
                 </a>
               </div>
             </div>
-            {/* secondary nav */}
-            <div className="hidden md:flex items-center space-x-1">
-              <a
-                href="#"
-                className="py-5 px-3 font-bold text-gray-100 hover:text-gray-300"
-              >
-                Login
-              </a>
-              <a
-                href="#"
-                className="py-5 px-3 font-bold text-gray-100 hover:text-gray-300"
-              >
-                Regsiter
-              </a>
-            </div>
+            {showSecondaryNav?(
+              /* secondary nav */
+              <div className="hidden md:flex items-center space-x-1">
+                <a
+                  href="/login"
+                  className="py-5 px-3 font-bold text-gray-100 hover:text-gray-300"
+                >
+                  Login
+                </a>
+                <a
+                  href="#"
+                  className="py-5 px-3 font-bold text-gray-100 hover:text-gray-300"
+                >
+                  Register
+                </a>
+              </div>):<></>}
             {/* mobile button goes here */}
             <div className="md:hidden lg:hidden flex items-center">
               <button
@@ -65,26 +66,31 @@ export default function Nav({ color }) {
             toggleMobile ? "mobile-menu md:hidden lg:hidden" : "hidden"
           }
         >
-          <a
-            href="#"
-            className="block py-2 px-4 text-xl text-gray-100 hover:text-gray-300"
-          >
-            About
-          </a>
-          <a
-            href="#"
-            className="block py-2 px-4 text-xl text-gray-100 hover:text-gray-300"
-          >
-            Login
-          </a>
-          <a
-            href="#"
-            className="block py-2 px-4 text-xl text-gray-100 hover:text-gray-300"
-          >
-            Register
-          </a>
+        <a
+          href="#"
+          className="block py-2 px-4 text-xl text-gray-100 hover:text-gray-300"
+        >
+          About
+        </a>{showSecondaryNav?(<>
+            <a
+              href="#"
+              className="block py-2 px-4 text-xl text-gray-100 hover:text-gray-300"
+            >
+              Login
+            </a>
+            <a
+              href="#"
+              className="block py-2 px-4 text-xl text-gray-100 hover:text-gray-300"
+            >
+              Register
+            </a>)</>):<></>}
         </div>
       </nav>
     </div>
   );
+}
+
+Nav.defaultProps = {
+  loggedOrLoggingIn: false,
+  color: 'transparent'
 }

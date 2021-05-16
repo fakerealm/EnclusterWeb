@@ -15,7 +15,7 @@ export default function Home() {
           crossOrigin="anonymous"
         />
         <div className="bg-gradient-to-br from-indigo-900 to-green-900 min-h-screen overflow-auto">
-          <Nav color="transparent" />
+          <Nav color="transparent" showSecondaryNav={true} />
           <div className="container max-w-5xl mx-auto px-4">
             <div className="w-4/5">
               <h1 className="mt-32 pb-3 font-black text-white text-7xl">
