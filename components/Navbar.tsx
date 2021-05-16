@@ -5,46 +5,49 @@ export default function Nav({ color, showSecondaryNav }) {
   return (
     <div className={color}>
       <nav>
-        <div className="max-w-6xl mx-auto px-4">
+        <div className="max-w-6xl px-4 mx-auto">
           <div className="flex justify-between">
             <div className="flex space-x-4">
               {/* logo */}
               <div>
                 <a
                   href="/"
-                  className="flex items-center py-5 px-2 text-gray-100 hover:text-gray-300"
+                  className="flex items-center px-2 py-5 text-gray-100 hover:text-gray-300"
                 >
-                  <span className="font-bold text-2xl">EnCluster</span>
+                  <span className="text-2xl font-bold">EnCluster</span>
                 </a>
               </div>
               {/* primary nav */}
-              <div className="hidden md:flex items-center space-x-1">
+              <div className="items-center hidden md:flex spacex-1">
                 <a
                   href="#"
-                  className="py-5 px-3 text-gray-100 hover:text-gray-300"
+                  className="px-3 py-5 text-gray-100 hover:text-gray-300"
                 >
                   About
                 </a>
               </div>
             </div>
-            {showSecondaryNav?(
+            {showSecondaryNav ? (
               /* secondary nav */
-              <div className="hidden md:flex items-center space-x-1">
+              <div className="items-center hidden md:flex space-x-1">
                 <a
                   href="/login"
-                  className="py-5 px-3 font-bold text-gray-100 hover:text-gray-300"
+                  className="px-3 py-5 font-bold text-gray-100 hover:text-gray-300"
                 >
                   Login
                 </a>
                 <a
                   href="#"
-                  className="py-5 px-3 font-bold text-gray-100 hover:text-gray-300"
+                  className="px-3 py-5 font-bold text-gray-100 hover:text-gray-300"
                 >
                   Register
                 </a>
-              </div>):<></>}
+              </div>
+            ) : (
+              <></>
+            )}
             {/* mobile button goes here */}
-            <div className="md:hidden lg:hidden flex items-center">
+            <div className="flex items-center md:hidden lg:hidden">
               <button
                 className="mobile-menu-button"
                 onClick={() => {
@@ -66,24 +69,31 @@ export default function Nav({ color, showSecondaryNav }) {
             toggleMobile ? "mobile-menu md:hidden lg:hidden" : "hidden"
           }
         >
-        <a
-          href="#"
-          className="block py-2 px-4 text-xl text-gray-100 hover:text-gray-300"
-        >
-          About
-        </a>{showSecondaryNav?(<>
-            <a
-              href="#"
-              className="block py-2 px-4 text-xl text-gray-100 hover:text-gray-300"
-            >
-              Login
-            </a>
-            <a
-              href="#"
-              className="block py-2 px-4 text-xl text-gray-100 hover:text-gray-300"
-            >
-              Register
-            </a>)</>):<></>}
+          <a
+            href="#"
+            className="block px-4 py-2 text-xl text-gray-100 hover:text-gray-300"
+          >
+            About
+          </a>
+          {showSecondaryNav ? (
+            <>
+              <a
+                href="/Login"
+                className="block px-4 py-2 text-xl text-gray-100 hover:text-gray-300"
+              >
+                Login
+              </a>
+              <a
+                href="#"
+                className="block px-4 py-2 text-xl text-gray-100 hover:text-gray-300"
+              >
+                Register
+              </a>
+              )
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </nav>
     </div>
@@ -92,5 +102,5 @@ export default function Nav({ color, showSecondaryNav }) {
 
 Nav.defaultProps = {
   loggedOrLoggingIn: false,
-  color: 'transparent'
-}
+  color: "transparent",
+};

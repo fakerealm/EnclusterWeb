@@ -8,3 +8,4 @@ coverage
 .vscode
 .jest
 out
+style/main.css

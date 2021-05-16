@@ -14,7 +14,8 @@ export default function Meta({ title, keywords, description }) {
 }
 
 Meta.defaultProps = {
-  title: "WebDev Newz",
-  keywords: "web development, programming",
-  description: "Get the latest news in web dev",
+  title: "EnCluster",
+  keywords:
+    "notes sharing, resource sharing for students, students, resource sharing, online school, tools to help online school, online school tools",
+  description: "Share resources and notes for school and clubs @EnCluster",
 };
