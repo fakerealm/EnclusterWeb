@@ -1,22 +1,90 @@
-export default function Nav() {
-  return (
-    <nav className="flex flex-col content-center w-full px-6 py-2 font-sans text-center bg-white shadow sm:flex-row sm:text-left sm:justify-between sm:items-baseline">
-      <img src="../Images/EnCluster.png" alt="" className="max-h-20" />
+import { useState } from "react";
 
-      <div className="self-center sm:mb-0">
-        <a
-          href="#"
-          className="mr-8 text-gray-700 hover:underline hover:text-gray-800"
+export default function Nav({ color }) {
+  const [toggleMobile, setToggleMobile] = useState(false);
+  return (
+    <div className={color}>
+      <nav>
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex justify-between">
+            <div className="flex space-x-4">
+              {/* logo */}
+              <div>
+                <a
+                  href="#"
+                  className="flex items-center py-5 px-2 text-gray-100 hover:text-gray-300"
+                >
+                  <span className="font-bold text-2xl">EnCluster</span>
+                </a>
+              </div>
+              {/* primary nav */}
+              <div className="hidden md:flex items-center space-x-1">
+                <a
+                  href="#"
+                  className="py-5 px-3 text-gray-100 hover:text-gray-300"
+                >
+                  About
+                </a>
+              </div>
+            </div>
+            {/* secondary nav */}
+            <div className="hidden md:flex items-center space-x-1">
+              <a
+                href="#"
+                className="py-5 px-3 font-bold text-gray-100 hover:text-gray-300"
+              >
+                Login
+              </a>
+              <a
+                href="#"
+                className="py-5 px-3 font-bold text-gray-100 hover:text-gray-300"
+              >
+                Regsiter
+              </a>
+            </div>
+            {/* mobile button goes here */}
+            <div className="md:hidden lg:hidden flex items-center">
+              <button
+                className="mobile-menu-button"
+                onClick={() => {
+                  setToggleMobile(!toggleMobile);
+                }}
+              >
+                <img
+                  src="/Images/menu.png"
+                  className="object-scale-down h-12"
+                  alt=""
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+        {/* mobile menu */}
+        <div
+          className={
+            toggleMobile ? "mobile-menu md:hidden lg:hidden" : "hidden"
+          }
         >
-          About
-        </a>
-        <button className="px-4 py-2 mr-6 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded hover:bg-blue-70">
-          Login
-        </button>
-        <button className="px-4 py-2 font-semibold text-blue-700 bg-transparent border border-blue-500 rounded hover:bg-blue-70">
-          Register
-        </button>
-      </div>
-    </nav>
-  )
+          <a
+            href="#"
+            className="block py-2 px-4 text-xl text-gray-100 hover:text-gray-300"
+          >
+            About
+          </a>
+          <a
+            href="#"
+            className="block py-2 px-4 text-xl text-gray-100 hover:text-gray-300"
+          >
+            Login
+          </a>
+          <a
+            href="#"
+            className="block py-2 px-4 text-xl text-gray-100 hover:text-gray-300"
+          >
+            Register
+          </a>
+        </div>
+      </nav>
+    </div>
+  );
 }
