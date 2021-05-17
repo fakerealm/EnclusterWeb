@@ -78,7 +78,7 @@ export default function Nav({ color, showSecondaryNav }) {
           {showSecondaryNav ? (
             <>
               <a
-                href="/Login"
+                href="/login"
                 className="block px-4 py-2 text-xl text-gray-100 hover:text-gray-300"
               >
                 Login
