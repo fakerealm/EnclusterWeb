@@ -1,8 +1,8 @@
-import Link from 'next/link';
-import {VerticalFeatureRow} from '../components/VerticalFeatureRow';
-import {Button} from '../components/Button';
-import Nav from '../components/Nav';
-import {Footer} from '../components/Footer';
+import Link from "next/link";
+import { VerticalFeatureRow } from "../components/VerticalFeatureRow";
+import { BigButton } from "../components/Button";
+import Nav from "../components/Nav";
+import { Footer } from "../components/Footer";
 
 const HomePage = () => (
   <>
@@ -25,7 +25,7 @@ const HomePage = () => (
             <br />
             <Link href="/register">
               <a>
-                <Button xl>Register Today!</Button>
+                <BigButton>Register Today!</BigButton>
               </a>
             </Link>
           </header>
