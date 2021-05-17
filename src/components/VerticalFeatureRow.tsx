@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import className from 'classnames';
+import className from "classnames";
 
 type IVerticalFeatureRowProps = {
   title: string;
@@ -11,9 +11,15 @@ type IVerticalFeatureRowProps = {
 };
 
 const VerticalFeatureRow = (props: IVerticalFeatureRowProps) => {
-  const verticalFeatureClass = className('mt-20', 'flex', 'flex-wrap', 'items-center', {
-    'flex-row-reverse': props.reverse,
-  });
+  const verticalFeatureClass = className(
+    "mt-20",
+    "flex",
+    "flex-wrap",
+    "items-center",
+    {
+      "flex-row-reverse": props.reverse,
+    }
+  );
 
   return (
     <div className={verticalFeatureClass}>
@@ -23,7 +29,10 @@ const VerticalFeatureRow = (props: IVerticalFeatureRowProps) => {
       </div>
 
       <div className="w-full p-6 sm:w-1/2">
-        <img src={`${process.env.baseUrl}${props.image}`} alt={props.imageAlt} />
+        <img
+          src={`${process.env.baseUrl}${props.image}`}
+          alt={props.imageAlt}
+        />
       </div>
     </div>
   );
