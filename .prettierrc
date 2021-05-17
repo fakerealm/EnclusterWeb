@@ -4,6 +4,4 @@
     "tabWidth": 4,
     "singleQuote": false,
     "jsxBracketSameLine": false,
-    "noSemi": true,
-    "rcVerbose": true
 }
