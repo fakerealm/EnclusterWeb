@@ -6,9 +6,9 @@ import "../styles/main.css";
 
 // eslint-disable-next-line react/jsx-props-no-spreading
 const MyApp = ({ Component, pageProps }: AppProps) => (
-  <>
-    <Component {...pageProps} />
-    <Footer />
-  </>
+    <>
+        <Component {...pageProps} />
+        <Footer />
+    </>
 );
 export default MyApp;
