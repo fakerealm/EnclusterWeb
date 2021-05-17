@@ -18,7 +18,7 @@ const Button = (props: IButtonProps) => (
 const BigButton = (props: IButtonProps) => (
     <button
         className={
-            "px-7 py-5 font-bold text-white bg-blue-500 rounded hover:bg-blue-700"
+            "px-5 py-3 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 text-lg"
         }
     >
         {props.children}

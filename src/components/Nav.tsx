@@ -10,7 +10,7 @@ export default function Nav(props: INavbarProps) {
     return (
         <div className={props.color}>
             <nav>
-                <div className="max-w-6xl px-4 mx-auto">
+                <div className="sticky top-0 z-50 max-w-6xl px-4 mx-auto">
                     <div className="flex justify-between">
                         <div className="flex space-x-4">
                             {/* logo */}
@@ -19,7 +19,7 @@ export default function Nav(props: INavbarProps) {
                                     href="/"
                                     className="flex items-center px-2 py-5 text-gray-100 hover:text-gray-300"
                                 >
-                                    <span className="text-2xl font-bold">
+                                    <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-green-500">
                                         EnCluster
                                     </span>
                                 </a>

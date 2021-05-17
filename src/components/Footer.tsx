@@ -3,22 +3,19 @@ import React from "react";
 const Footer = () => (
     <footer className="text-gray-600 body-font">
         <div className="container flex flex-col items-center px-5 py-8 mx-auto sm:flex-row">
-            <a className="flex items-center justify-center font-medium text-gray-900 title-font md:justify-start">
-                <span className="ml-3 text-xl">EnCluster</span>
-            </a>
-            <p className="mt-4 text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0">
+            <p className="text-lg text-gray-700">
                 Made with ❤️ by
                 <a
                     href="https://github.com/EnCluster"
-                    className="ml-1 text-gray-600"
+                    className="ml-1 font-bold text-blue-900"
                     rel="noopener noreferrer"
                     target="_blank"
                 >
-                    Encluster{" "}
+                    Encluster
                 </a>
             </p>
             <span className="inline-flex justify-center mt-4 sm:ml-auto sm:mt-0 sm:justify-start">
-                <a href="https://ww.github.com/EnCluster">
+                <a href="https://www.github.com/EnCluster">
                     {" "}
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

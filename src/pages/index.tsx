@@ -6,41 +6,46 @@ import { Footer } from "../components/Footer";
 
 const HomePage = () => (
     <>
-        <div className="bg-blue-50">
+        <div class="flex flex-col h-screen">
             <Nav color="bg-gray-900" showSecondaryNav={true} />
-            <div className="px-3 pt-20 mx-auto max-w-screen-lg">
-                <div className="mb-12 text-center">
-                    <header className="text-center">
-                        <h1 className="text-5xl font-bold text-gray-900 whitespace-pre-line leading-hero">
-                            <span className="text-primary-500">Encluster</span>
-                            <br />
-                            <span className="text-2xl md:text-4xl">
-                                The best way to share notes and resources
-                            </span>
-                            <br />
-                            <span className="text-xl text-primary-500 md:text-3xl">
-                                We are 100% open source
-                            </span>
-                        </h1>
-                        <br />
-                        <Link href="/register">
-                            <a>
-                                <BigButton>Register Today!</BigButton>
-                            </a>
-                        </Link>
-                    </header>
+            <main className="flex-1 overflow-y-auto">
+                <div className="bg-blue-50">
+                    <div className="pt-16 mx-auto max-w-screen-lg">
+                        <div className="mb-12 text-center">
+                            <header className="text-center">
+                                <h1 className="font-bold text-gray-900 whitespace-pre-line leading-hero">
+                                    <span className="text-5xl text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-green-500 md:text-6xl">
+                                        Encluster
+                                    </span>
+                                    <br />
+                                    <span className="text-2xl text-gray-700 md:text-4xl">
+                                        The best way to share notes and
+                                        resources
+                                    </span>
+                                    <br />
+                                </h1>
+                                <br />
+                                <Link href="/register">
+                                    <a>
+                                        <BigButton>Register Today!</BigButton>
+                                    </a>
+                                </Link>
+                            </header>
+                        </div>
+                    </div>
+                    <div className="px-3 pb-20 mx-auto max-w-screen-lg">
+                        <div className="mb-12 text-center">
+                            <VerticalFeatureRow
+                                title="About EnCluster"
+                                description="Encluster is an open source app that allows you to share your notes and resources. Perfect for students of all grades, you can both view the notes uploaded by others and share your own. Free for all!"
+                                image="/assets/images/feature.png"
+                                imageAlt="First feature alt text"
+                            />
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div className="px-3 pb-20 mx-auto max-w-screen-lg">
-                <div className="mb-12 text-center">
-                    <VerticalFeatureRow
-                        title="Your title here"
-                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse bibendum, nunc non posuere consectetur, justo erat semper enim, non hendrerit dui odio id enim."
-                        image="/assets/images/feature.png"
-                        imageAlt="First feature alt text"
-                    />
-                </div>
-            </div>
+                <Footer />
+            </main>
         </div>
     </>
 );

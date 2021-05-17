@@ -3,5 +3,5 @@
     "printWidth": 80,
     "tabWidth": 4,
     "singleQuote": false,
-    "jsxBracketSameLine": false,
+    "jsxBracketSameLine": false
 }

@@ -1,7 +1,5 @@
 import React from "react";
 
-import className from "classnames";
-
 type IVerticalFeatureRowProps = {
     title: string;
     description: string;
@@ -11,18 +9,8 @@ type IVerticalFeatureRowProps = {
 };
 
 const VerticalFeatureRow = (props: IVerticalFeatureRowProps) => {
-    const verticalFeatureClass = className(
-        "mt-20",
-        "flex",
-        "flex-wrap",
-        "items-center",
-        {
-            "flex-row-reverse": props.reverse,
-        }
-    );
-
     return (
-        <div className={verticalFeatureClass}>
+        <div className="flex flex-wrap items-center">
             <div className="w-full text-center sm:w-1/2 sm:px-6">
                 <h3 className="text-3xl font-semibold text-gray-900">
                     {props.title}
