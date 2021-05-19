@@ -6,7 +6,7 @@ import { Footer } from "../components/Footer";
 
 const HomePage = () => (
     <>
-        <div class="flex flex-col h-screen">
+        <div className="flex flex-col h-screen">
             <Nav color="bg-gray-900" showSecondaryNav={true} />
             <main className="flex-1 overflow-y-auto">
                 <div className="bg-blue-50">

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Link from "next/link";
+import { useUser } from "../firebase/useUser";
 
 type INavbarProps = {
     color: string;
@@ -6,6 +8,7 @@ type INavbarProps = {
 };
 
 export default function Nav(props: INavbarProps) {
+    const { user, logout } = useUser();
     const [toggleMobile, setToggleMobile] = useState(false);
     return (
         <div className={props.color}>
@@ -15,41 +18,45 @@ export default function Nav(props: INavbarProps) {
                         <div className="flex space-x-4">
                             {/* logo */}
                             <div>
-                                <a
-                                    href="/"
-                                    className="flex items-center px-2 py-5 text-gray-100 hover:text-gray-300"
-                                >
-                                    <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-green-500">
-                                        EnCluster
-                                    </span>
-                                </a>
+                                <Link href="/">
+                                    <a className="flex items-center px-2 py-5 text-gray-100 hover:text-gray-300">
+                                        <span className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-green-500">
+                                            EnCluster
+                                        </span>
+                                    </a>
+                                </Link>
                             </div>
                             {/* primary nav */}
                             <div className="items-center hidden md:flex spacex-1">
-                                <a
-                                    href="#"
-                                    className="px-3 py-5 text-gray-100 hover:text-gray-300"
-                                >
-                                    About
-                                </a>
+                                <Link href="/about">
+                                    <a className="px-3 py-5 text-gray-100 hover:text-gray-300">
+                                        About
+                                    </a>
+                                </Link>
                             </div>
                         </div>
                         {props.showSecondaryNav ? (
-                            /* secondary nav */
-                            <div className="items-center hidden md:flex space-x-1">
-                                <a
-                                    href="/login"
-                                    className="px-3 py-5 font-bold text-gray-100 hover:text-gray-300"
-                                >
-                                    Login
-                                </a>
-                                <a
-                                    href="#"
-                                    className="px-3 py-5 font-bold text-gray-100 hover:text-gray-300"
-                                >
-                                    Register
-                                </a>
-                            </div>
+                            user ? (
+                                <>
+                                    <div className="items-center hidden md:flex space-x-1">
+                                        <a
+                                            className="px-3 py-5 font-bold text-gray-100 hover:text-gray-300"
+                                            onClick={logout}
+                                        >
+                                            Logout
+                                        </a>
+                                    </div>
+                                </>
+                            ) : (
+                                /* secondary nav */
+                                <div className="items-center hidden md:flex space-x-1">
+                                    <Link href="/auth">
+                                        <a className="px-3 py-5 font-bold text-gray-100 hover:text-gray-300">
+                                            Login/Register
+                                        </a>
+                                    </Link>
+                                </div>
+                            )
                         ) : (
                             <></>
                         )}
@@ -78,28 +85,30 @@ export default function Nav(props: INavbarProps) {
                             : "hidden"
                     }
                 >
-                    <a
-                        href="#"
-                        className="block px-4 py-2 text-xl text-gray-100 hover:text-gray-300 hover:bg-blue-500"
-                    >
-                        About
-                    </a>
+                    <Link href="/about">
+                        <a className="block px-4 py-2 text-xl text-gray-100 hover:text-gray-300 hover:bg-blue-500">
+                            About
+                        </a>
+                    </Link>
                     {props.showSecondaryNav ? (
-                        <>
-                            <a
-                                href="/login"
-                                className="block px-4 py-2 text-xl text-gray-100 hover:text-gray-300 hover:bg-blue-500"
-                            >
-                                Login
-                            </a>
-                            <a
-                                href="#"
-                                className="block px-4 py-2 text-xl text-gray-100 hover:text-gray-300 hover:bg-blue-500"
-                            >
-                                Register
-                            </a>
-                            )
-                        </>
+                        user ? (
+                            <>
+                                <a
+                                    className="block px-4 py-2 text-xl text-gray-100 hover:text-gray-300 hover:bg-blue-500"
+                                    onClick={logout}
+                                >
+                                    Logout
+                                </a>
+                            </>
+                        ) : (
+                            <>
+                                <Link href="/auth">
+                                    <a className="block px-4 py-2 text-xl text-gray-100 hover:text-gray-300 hover:bg-blue-500">
+                                        Login/Register
+                                    </a>
+                                </Link>
+                            </>
+                        )
                     ) : (
                         <></>
                     )}

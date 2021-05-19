@@ -12,8 +12,16 @@ import { mapUserData } from "./mapUserData";
 
 initFirebase();
 
+interface dataUser {
+    id: number;
+    email: number;
+    token: string;
+    name: string;
+    profilePic: string | null;
+}
+
 const useUser = () => {
-    const [user, setUser] = useState();
+    const [user, setUser] = useState<dataUser | null>(null);
     const router = useRouter();
 
     const logout = async () => {
@@ -40,7 +48,7 @@ const useUser = () => {
                 setUser(userData);
             } else {
                 removeUserCookie();
-                setUser();
+                setUser(null);
             }
         });
 
