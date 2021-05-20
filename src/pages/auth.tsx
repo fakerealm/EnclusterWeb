@@ -23,51 +23,83 @@ const Auth = () => {
     if (!isSignedIn) {
         return (
             <>
-                <div className="flex flex-col h-screen bg-gray-900">
-                    <main className="flex-1 overflow-y-auto">
-                        <div className="pt-4 mx-auto max-w-screen-lg">
-                            <div className="pb-12 mb-12 text-center">
-                                <Link href="/">
-                                    <h2 className="text-5xl text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-green-500 md:text-6xl">
-                                        EnCluster
-                                    </h2>
-                                </Link>{" "}
-                                <h3 className="text-5xl text-gray-500">
-                                    Login or Register
-                                </h3>
+                <main>
+                    <section className="absolute w-full h-full">
+                        <div
+                            className="absolute top-0 w-full h-full bg-gray-900"
+                            style={{
+                                backgroundImage:
+                                    "url(/assets/images/register_bg_2.png)",
+                            }}
+                        ></div>
+                        <div className="container h-full px-4 mx-auto">
+                            <div className="flex items-center content-center justify-center h-full">
+                                <div className="w-full px-4 lg:w-4/12">
+                                    <div className="relative flex flex-col w-full min-w-0 mb-6 break-words bg-gray-300 border-0 rounded-lg shadow-lg">
+                                        <div className="px-6 py-6 rounded-t sm:px-3">
+                                            <div className="mb-3 text-center">
+                                                <h3 className="pb-6 text-4xl font-bold text-gray-700 font-extralight">
+                                                    Sign in or register
+                                                </h3>
+                                            </div>
+                                            <div className="flex-auto px-4 py-10 pt-0 lg:px-10">
+                                                <div className="mb-3 font-bold text-center text-gray-500">
+                                                    <FirebaseAuth />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className="px-3 mx-auto max-w-screen-lg pb-52">
-                            <div className="mb-12 text-center">
-                                <FirebaseAuth />
+                        <Link href="https://www.github.com/EnCluster/EnClusterWeb">
+                            <a className="absolute bottom-0 right-0 pb-10 pr-10 font-mono text-lg text-gray-100">
+                                Our Github
+                            </a>
+                        </Link>
+                    </section>
+                </main>
+            </>
+        );
+    } else {
+        return (
+            <>
+                <main>
+                    <section className="absolute w-full h-full">
+                        <div
+                            className="absolute top-0 w-full h-full bg-gray-900"
+                            style={{
+                                backgroundImage:
+                                    "url(/assets/images/register_bg_2.png)",
+                            }}
+                        ></div>
+                        <div className="container h-full px-4 mx-auto">
+                            <div className="flex items-center content-center justify-center h-full">
+                                <div className="w-full px-4 lg:w-4/12">
+                                    <div className="relative flex flex-col w-full min-w-0 mb-6 break-words bg-gray-300 border-0 rounded-lg shadow-lg">
+                                        <div className="px-6 py-6 rounded-t sm:px-3">
+                                            <div className="mb-3 text-center">
+                                                <Link href="/">
+                                                    <h3 className="pb-6 text-4xl font-bold text-gray-700 font-extralight">
+                                                        Go home
+                                                    </h3>
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <Footer />
-                    </main>
-                </div>
+                        <Link href="https://www.github.com/EnCluster/EnClusterWeb">
+                            <a className="absolute bottom-0 right-0 pb-10 pr-10 font-mono text-4xl text-gray-100">
+                                Our Github
+                            </a>
+                        </Link>
+                    </section>
+                </main>
             </>
         );
     }
-    return (
-        <>
-            <div className="flex flex-col h-screen bg-gray-900">
-                <main className="flex-1 overflow-y-auto">
-                    <div className="pt-4 mx-auto max-w-screen-lg">
-                        <div className="mb-12 text-center pb-96">
-                            <Link href="/">
-                                <h2 className="text-5xl text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-green-500 md:text-6xl">
-                                    EnCluster
-                                    <br />
-                                    Go Home
-                                </h2>
-                            </Link>{" "}
-                        </div>
-                    </div>
-                    <Footer />
-                </main>
-            </div>
-        </>
-    );
 };
 
 export default Auth;
