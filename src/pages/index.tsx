@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import { useUser } from "../firebase/useUser";
 
 const HomePage = () => {
-    const {user, logout} = useUser()
+    const { user, logout } = useUser();
     return (
         <>
             <div className="flex flex-col h-screen">
@@ -17,20 +17,24 @@ const HomePage = () => {
                             <div className="mb-12 text-center">
                                 <header className="text-center">
                                     <h1 className="font-bold text-gray-900 whitespace-pre-line leading-hero">
-                                        <span className="text-5xl text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-green-500 md:text-6xl">
+                                        <span className="text-4xl text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-green-500 md:text-6xl">
                                             Encluster
-                                    </span>
+                                        </span>
                                         <br />
-                                        <span className="text-2xl text-gray-700 md:text-4xl">
+                                        <span className="text-xs text-gray-700 md:text-4xl sm:text-2xl">
                                             The best way to share notes and
                                             resources
-                                    </span>
+                                        </span>
                                         <br />
                                     </h1>
                                     <br />
-                                    <Link href={!user?"/register":"/"}>
+                                    <Link href={!user ? "/register" : "/"}>
                                         <a>
-                                            <BigButton>{!user?'Register Today!':'Create an organization'}</BigButton>
+                                            <BigButton>
+                                                {!user
+                                                    ? "Register Today!"
+                                                    : "Create an organization"}
+                                            </BigButton>
                                         </a>
                                     </Link>
                                 </header>
@@ -51,7 +55,7 @@ const HomePage = () => {
                 </main>
             </div>
         </>
-    )
+    );
 };
 
 export default HomePage;
