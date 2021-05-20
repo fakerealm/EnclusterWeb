@@ -28,7 +28,7 @@ const HomePage = () => {
                                         <br />
                                     </h1>
                                     <br />
-                                    <Link href="/register">
+                                    <Link href={!user?"/register":"/"}>
                                         <a>
                                             <BigButton>{!user?'Register Today!':'Create an organization'}</BigButton>
                                         </a>
