@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import { useUser } from "../firebase/useUser";
 
 const HomePage = () => {
-    const { user, logout } = useUser();
+    const { user } = useUser();
     return (
         <>
             <div className="flex flex-col h-screen">
@@ -17,11 +17,11 @@ const HomePage = () => {
                             <div className="mb-12 text-center">
                                 <header className="text-center">
                                     <h1 className="font-bold text-gray-900 whitespace-pre-line leading-hero">
-                                        <span className="text-4xl text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-green-500 md:text-6xl">
+                                        <span className="text-6xl text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-green-500 md:text-6xl">
                                             Encluster
                                         </span>
                                         <br />
-                                        <span className="text-lg text-gray-700 md:text-4xl sm:text-2xl">
+                                        <span className="text-gray-700 md:text-4xl md:text-gray-700">
                                             The best way to share notes and
                                             resources
                                         </span>

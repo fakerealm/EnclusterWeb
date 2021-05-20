@@ -1,6 +1,5 @@
 import FirebaseAuth from "../components/auth/FireBaseAuth";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 import firebase from "firebase";
@@ -9,7 +8,6 @@ import initFirebase from "../firebase/initFirebase";
 initFirebase();
 
 const Auth = () => {
-    const router = useRouter();
     const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
 
     // Listen to the Firebase Auth state and set the local state.
