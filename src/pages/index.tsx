@@ -21,7 +21,7 @@ const HomePage = () => {
                                             Encluster
                                         </span>
                                         <br />
-                                        <span className="text-xs text-gray-700 md:text-4xl sm:text-2xl">
+                                        <span className="text-lg text-gray-700 md:text-4xl sm:text-2xl">
                                             The best way to share notes and
                                             resources
                                         </span>
