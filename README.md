@@ -6,7 +6,7 @@
 ```
 git clone git@github.com:EnCluster/EnclusterWeb.git
 ```
-### Populate a .env.local file firebase credential using the following environment variable names
+### Populate a .env.local file with firebase credentials using the following environment variable names
 ```
 NEXT_PUBLIC_FIREBASE_API_KEY=
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
