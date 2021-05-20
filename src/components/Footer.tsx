@@ -4,7 +4,7 @@ const Footer = () => (
     <footer className="text-gray-600 body-font">
         <div className="container flex flex-col items-center px-5 py-6 mx-auto sm:flex-row">
             <p className="text-lg text-gray-700">
-                Made with ❤️ by
+                Made with ❤️ <span className="pl-2">by</span>
                 <a
                     href="https://github.com/EnCluster"
                     className="ml-1 font-bold text-blue-900"
