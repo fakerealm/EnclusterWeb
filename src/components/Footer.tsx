@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => (
     <footer className="text-gray-600 body-font">
-        <div className="container flex flex-col items-center px-5 py-8 mx-auto sm:flex-row">
+        <div className="container flex flex-col items-center px-5 py-6 mx-auto sm:flex-row">
             <p className="text-lg text-gray-700">
                 Made with ❤️ by
                 <a
@@ -16,7 +16,6 @@ const Footer = () => (
             </p>
             <span className="inline-flex justify-center mt-4 sm:ml-auto sm:mt-0 sm:justify-start">
                 <a href="https://www.github.com/EnCluster">
-                    {" "}
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -30,4 +29,4 @@ const Footer = () => (
         </div>
     </footer>
 );
-export { Footer };
+export default Footer;
