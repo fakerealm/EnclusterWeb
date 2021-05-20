@@ -2,10 +2,11 @@
 
 ## To run locally
 
+### Clone the repository
 ```
 git clone git@github.com:EnCluster/EnclusterWeb.git
 ```
-Populate a .env.local file firebase credential using the following environment variable names
+### Populate a .env.local file firebase credential using the following environment variable names
 ```
 NEXT_PUBLIC_FIREBASE_API_KEY=
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
@@ -15,7 +16,8 @@ NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
 NEXT_PUBLIC_FIREBASE_APP_ID=
 ```
-<br />
+
+### Run the development server
 ```
 yarn
 yarn dev
