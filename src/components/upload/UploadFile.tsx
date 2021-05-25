@@ -21,7 +21,7 @@ export default () => {
             var storageRef = firebase
                 .storage()
                 .ref(
-                    "posts/" +
+                    "test-org/posts/" +
                         user?.id.toString() +
                         "/" +
                         Math.random().toString() +
@@ -33,43 +33,40 @@ export default () => {
             // ref for uplaoding post
             const postsRef = firebase
                 .firestore()
-                .collection("posts")
-                .doc(user?.id?.toString());
-            firebase
-                .firestore()
-                .collection("posts")
-                .doc(user?.id.toString())
-                .get()
-                .then(async (doc) => {
-                    const url = await storageRef.getDownloadURL();
-                    if (doc.exists) {
-                        // if the document has been created
-                        // @ts-ignore: Object is possibly 'null'.
-                        let data = doc.data().posts;
-                        data.push({
-                            user_id: user?.id,
-                            posted_time: Date.now().toString(),
-                            url: url,
-                        });
-                        console.log(data);
-                        postsRef.update({
-                            posts: data,
-                        });
-                    } else {
-                        postsRef
-                            .set({
-                                posts: [
-                                    {
-                                        user_id: user?.id,
-                                        posted_time: Date.now().toString(),
-                                        url: url,
-                                    },
-                                ],
-                            })
-                            .then()
-                            .catch((error) => console.error(error));
-                    }
-                });
+                .collection("organizations")
+                .doc("test-org")
+                // @ts-ignore: Object is possibly 'null'.
+                .collection(user.id.toString())
+                .doc(user?.id.toString());
+            postsRef.get().then(async (doc) => {
+                const url = await storageRef.getDownloadURL();
+                if (doc.exists) {
+                    // if the document has been created
+                    // @ts-ignore: Object is possibly 'null'.
+                    let data = doc.data().posts;
+                    data.push({
+                        user_id: user?.id,
+                        posted_time: Date.now().toString(),
+                        url: url,
+                    });
+                    postsRef.update({
+                        posts: data,
+                    });
+                } else {
+                    postsRef
+                        .set({
+                            posts: [
+                                {
+                                    user_id: user?.id,
+                                    posted_time: Date.now().toString(),
+                                    url: url,
+                                },
+                            ],
+                        })
+                        .then()
+                        .catch((error) => console.error(error));
+                }
+            });
         } else {
             setMessage("File too big please choose a file smaller than 25 MB.");
         }
