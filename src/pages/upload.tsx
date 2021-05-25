@@ -1,6 +1,10 @@
-import UploadFiles from "../components/storage/UploadFile"
+import UploadFiles from "../components/upload/UploadFile";
 
-UploadFiles
-export default function upload(){
-  return <><UploadFiles /></>
+UploadFiles;
+export default function upload() {
+    return (
+        <>
+            <UploadFiles />
+        </>
+    );
 }
