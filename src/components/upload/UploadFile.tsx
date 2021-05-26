@@ -30,7 +30,7 @@ export default () => {
                 );
             await storageRef.put(file); // upload file
 
-            // ref for uplaoding post
+            // ref for uploading post
             const postsRef = firebase
                 .firestore()
                 .collection("organizations")
@@ -38,38 +38,44 @@ export default () => {
                 // @ts-ignore: Object is possibly 'null'.
                 .collection(user.id.toString())
                 .doc(user?.id.toString());
+
             postsRef.get().then(async (doc) => {
                 const url = await storageRef.getDownloadURL();
+
+                const postObj = {
+                    user_id: user?.id,
+                    posted_time: Date.now().toString(),
+                    url: url,
+                };
+
                 if (doc.exists) {
                     // if the document has been created
+
                     // @ts-ignore: Object is possibly 'null'.
                     let data = doc.data().posts;
-                    data.push({
-                        user_id: user?.id,
-                        posted_time: Date.now().toString(),
-                        url: url,
-                    });
+
+                    data.push(postObj);
+
                     postsRef.update({
                         posts: data,
                     });
                 } else {
+                    //set new value to the document
+
                     postsRef
                         .set({
-                            posts: [
-                                {
-                                    user_id: user?.id,
-                                    posted_time: Date.now().toString(),
-                                    url: url,
-                                },
-                            ],
+                            posts: [postObj],
                         })
+
                         .then()
                         .catch((error) => console.error(error));
                 }
             });
         } else {
+            //file is too big
             setMessage("File too big please choose a file smaller than 25 MB.");
         }
+
         setMessage("Completed!");
     };
 
