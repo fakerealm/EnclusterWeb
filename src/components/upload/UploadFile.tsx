@@ -1,110 +1,223 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import firebase from "firebase/app";
 import "firebase/storage";
 import "firebase/firestore";
 import { useUser } from "../../firebase/useUser";
 import initFirebase from "../../firebase/initFirebase";
+import style from "../../styles/fileUpload.module.css";
 
 initFirebase(); // Initialize firebase
 
-export default () => {
-    const [content, setContent] = useState("");
+const UploadFile = () => {
+    const [postTitle, setPostTitle] = useState("");
     const [file, setFile] = useState<any>(null); // the file
     const fileUploadRef = useRef() as React.MutableRefObject<HTMLInputElement>;
     const [message, setMessage] = useState<string>("");
     const { user } = useUser();
+    const textareaRef = useRef(null);
+    const [postDescription, setPostDescription] = useState<string>(""); // you can manage data with it
+    const [descriptionError, setDescriptionError] = useState<string>("");
+    const [titleError, setTitleError] = useState<string>("");
+    const [fileError, setFileError] = useState<string>("");
+
+    useEffect(() => {
+        textareaRef.current.style.height = "0px";
+        const scrollHeight = textareaRef.current.scrollHeight;
+        textareaRef.current.style.height = scrollHeight + "px";
+    }, [postDescription]);
     const uploadFile = async () => {
-        setMessage("Please wait uploading file...");
-        // check if file is larger than 25 mb
-        if (file.size < 25000001) {
-            //ref for upliading file
-            var storageRef = firebase
-                .storage()
-                .ref(
-                    "test-org/posts/" +
-                        user?.id.toString() +
-                        "/" +
-                        Math.random().toString() +
-                        user?.id.toString() +
-                        file.name
+        if (file) {
+            setMessage("Please wait uploading file...");
+            // check if file is larger than 25 mb
+            if (file.size < 25000001) {
+                //ref for upliading file
+                var storageRef = firebase
+                    .storage()
+                    .ref(
+                        "test-org/posts/" +
+                            user?.id.toString() +
+                            "/" +
+                            Math.random().toString() +
+                            user?.id.toString() +
+                            file.name
+                    );
+                await storageRef.put(file); // upload file
+
+                // ref for uploading post
+                const postsRef = firebase
+                    .firestore()
+                    .collection("organizations")
+                    .doc("test-org")
+                    .collection(user.id.toString())
+                    .doc(user?.id.toString());
+
+                postsRef.get().then(async (doc) => {
+                    const url = await storageRef.getDownloadURL();
+
+                    const postObj = {
+                        user_id: user?.id,
+                        posted_time: Date.now().toString(),
+                        url: url,
+                        title: postTitle,
+                        description: postDescription,
+                    };
+
+                    if (doc.exists) {
+                        // if the document has been created
+
+                        let data = doc.data().posts;
+
+                        data.push(postObj);
+
+                        postsRef.update({
+                            posts: data,
+                        });
+                    } else {
+                        //set new value to the document
+
+                        postsRef
+                            .set({
+                                posts: [postObj],
+                            })
+
+                            .then()
+                            .catch((error) => console.error(error));
+                    }
+                });
+            } else {
+                //file is too big
+                setMessage(
+                    "File too big please choose a file smaller than 25 MB."
                 );
-            await storageRef.put(file); // upload file
+            }
 
-            // ref for uploading post
-            const postsRef = firebase
-                .firestore()
-                .collection("organizations")
-                .doc("test-org")
-                // @ts-ignore: Object is possibly 'null'.
-                .collection(user.id.toString())
-                .doc(user?.id.toString());
-
-            postsRef.get().then(async (doc) => {
-                const url = await storageRef.getDownloadURL();
-
-                const postObj = {
-                    user_id: user?.id,
-                    posted_time: Date.now().toString(),
-                    url: url,
-                };
-
-                if (doc.exists) {
-                    // if the document has been created
-
-                    // @ts-ignore: Object is possibly 'null'.
-                    let data = doc.data().posts;
-
-                    data.push(postObj);
-
-                    postsRef.update({
-                        posts: data,
-                    });
-                } else {
-                    //set new value to the document
-
-                    postsRef
-                        .set({
-                            posts: [postObj],
-                        })
-
-                        .then()
-                        .catch((error) => console.error(error));
-                }
-            });
+            setMessage("Completed!");
         } else {
-            //file is too big
-            setMessage("File too big please choose a file smaller than 25 MB.");
+            setFileError("Please choose a file");
         }
-
-        setMessage("Completed!");
     };
 
+    function validateData() {
+        let validDescription = false;
+        if (postDescription.length < 30) {
+            setDescriptionError("Description must be at least 30 characters");
+        } else if (postDescription.length > 1000) {
+            setDescriptionError(
+                "Description must be less than 1000 characters"
+            );
+        } else {
+            validDescription = true;
+        }
+        if (postTitle.length < 10) {
+            setTitleError("Title must be at least 10 characters");
+        } else if (postTitle.length > 100) {
+            setTitleError("Title must be less than 100 characters");
+        } else {
+            if (validDescription) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
     function handleSubmit(event: any) {
-        // calls uploadFile
         event.preventDefault();
-        uploadFile();
+        if (validateData()) {
+            uploadFile();
+        }
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input
-                type="text"
-                placeholder="Add Post Content"
-                onChange={(event) => setContent(event.target.value)}
-                value={content}
-            />
-            <input
-                type="file"
-                // @ts-ignore: Object is possibly 'null'.
+        <form onSubmit={handleSubmit} className="p-12">
+            <div className="flex flex-wrap mb-6 -mx-3">
+                <div className="w-full px-3">
+                    <label
+                        className="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase"
+                        htmlFor="grid-password"
+                    >
+                        File post title
+                    </label>
+                    <input
+                        className="block w-full px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                        type="text"
+                        onChange={(event) => setPostTitle(event.target.value)}
+                        value={postTitle}
+                        required
+                    />
+                    <p className="text-xs italic text-red-500">{titleError}</p>
+                </div>
+            </div>
+            <div className="flex flex-wrap mb-6 -mx-3">
+                <div className="w-full px-3">
+                    <label
+                        className="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase"
+                        htmlFor="grid-password"
+                    >
+                        File description
+                    </label>
+                    <textarea
+                        className="block w-full h-48 px-4 py-3 mb-3 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none resize-none no-resize focus:outline-none focus:bg-white focus:border-gray-500"
+                        id="message"
+                        onChange={(e) => {
+                            setPostDescription(e.target.value);
+                        }}
+                        ref={textareaRef}
+                        value={postDescription}
+                    />
+                    <p className="text-xs italic text-red-500">
+                        {descriptionError}
+                    </p>
+                </div>
+            </div>
+            <div className="md:flex md:items-center">
+                <div className="md:w-1/3"></div>
+                <div className="md:w-2/3" />
+            </div>
+            <br />
 
-                onChange={(event) => setFile(event.target.files[0])}
-                /* Without @ts-ignore there was some bug or another,
-                 * it isn't the best practice to use @ts-ignore but conditionals didn't work.
-                 */
-                ref={fileUploadRef}
-            />
-            <p>{message}</p>
-            <button type="submit">Submit Form</button>
+            <div className="flex pb-10 font-sans text-center">
+                <label className={style.customFileUpload}>
+                    <input
+                        type="file"
+                        multiple
+                        // @ts-ignore: Object is possibly 'null'.
+                        onChange={(event) => setFile(event.target.files[0])}
+                        ref={fileUploadRef}
+                        className={style.file}
+                        required
+                    />
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        x="0"
+                        y="0"
+                        enableBackground="new 0 0 471.2 471.2"
+                        version="1.1"
+                        viewBox="0 0 471.2 471.2"
+                        xmlSpace="preserve"
+                        height="30px"
+                        width="30px"
+                        className="mx-auto"
+                    >
+                        <path d="M457.7 230.15c-7.5 0-13.5 6-13.5 13.5v122.8c0 33.4-27.2 60.5-60.5 60.5H87.5c-33.4 0-60.5-27.2-60.5-60.5v-124.8c0-7.5-6-13.5-13.5-13.5s-13.5 6-13.5 13.5v124.8c0 48.3 39.3 87.5 87.5 87.5h296.2c48.3 0 87.5-39.3 87.5-87.5v-122.8c0-7.4-6-13.5-13.5-13.5z"></path>
+                        <path d="M159.3 126.15l62.8-62.8v273.9c0 7.5 6 13.5 13.5 13.5s13.5-6 13.5-13.5V63.35l62.8 62.8c2.6 2.6 6.1 4 9.5 4 3.5 0 6.9-1.3 9.5-4 5.3-5.3 5.3-13.8 0-19.1l-85.8-85.8c-2.5-2.5-6-4-9.5-4-3.6 0-7 1.4-9.5 4l-85.8 85.8c-5.3 5.3-5.3 13.8 0 19.1 5.2 5.2 13.8 5.2 19 0z"></path>
+                    </svg>
+                    Choose File
+                </label>
+
+                <p className="text-xs italic text-red-500">{fileError}</p>
+            </div>
+            <p className="mt-0 mb-2 text-2xl font-normal leading-normal text-green-700">
+                {message}
+            </p>
+            <button
+                type="submit"
+                className="px-4 py-2 font-semibold text-gray-700 bg-transparent border border-gray-500 rounded hover:bg-gray-300 hover:text-black"
+            >
+                Post File
+            </button>
         </form>
     );
 };
+export default UploadFile;

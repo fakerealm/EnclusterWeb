@@ -31,7 +31,8 @@
 
         "jsx": "preserve",
         "noEmit": true,
-        "isolatedModules": true
+        "isolatedModules": true,
+        "strictNullChecks": false
     },
     "exclude": ["./dist/**/*", "./node_modules/**/*"],
     "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
