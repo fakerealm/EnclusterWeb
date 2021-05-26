@@ -25,3 +25,6 @@ yarn dev
 
 ## [Latest deployed version](https://en-cluster-web.vercel.app)
 ## [Source code for latest deployed version](https://github.com/samrath2007/enclusterWeb/)
+
+### Authors
+- [samrath2757](https://github.com/samrath2007/)Founder And Developer Of EnCluster
