@@ -22,4 +22,6 @@ NEXT_PUBLIC_FIREBASE_APP_ID=
 yarn
 yarn dev
 ```
-## Latest [build](https://en-cluster-web.vercel.app)
+
+## [Latest deployed version](https://en-cluster-web.vercel.app)
+## [Source code for latest deployed version](https://github.com/samrath2007/enclusterWeb/)
