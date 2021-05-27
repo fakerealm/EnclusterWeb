@@ -19,82 +19,84 @@ const UploadFile = () => {
     const [descriptionError, setDescriptionError] = useState<string>("");
     const [titleError, setTitleError] = useState<string>("");
     const [fileError, setFileError] = useState<string>("");
+    const [fileName, setFileName] = useState<string>("");
 
     useEffect(() => {
         textareaRef.current.style.height = "0px";
         const scrollHeight = textareaRef.current.scrollHeight;
         textareaRef.current.style.height = scrollHeight + "px";
     }, [postDescription]);
-    const uploadFile = async () => {
+
+    useEffect(() => {
         if (file) {
-            setMessage("Please wait uploading file...");
-            // check if file is larger than 25 mb
-            if (file.size < 25000001) {
-                //ref for upliading file
-                var storageRef = firebase
-                    .storage()
-                    .ref(
-                        "test-org/posts/" +
-                            user?.id.toString() +
-                            "/" +
-                            Math.random().toString() +
-                            user?.id.toString() +
-                            file.name
-                    );
-                await storageRef.put(file); // upload file
-
-                // ref for uploading post
-                const postsRef = firebase
-                    .firestore()
-                    .collection("organizations")
-                    .doc("test-org")
-                    .collection(user.id.toString())
-                    .doc(user?.id.toString());
-
-                postsRef.get().then(async (doc) => {
-                    const url = await storageRef.getDownloadURL();
-
-                    const postObj = {
-                        user_id: user?.id,
-                        posted_time: Date.now().toString(),
-                        url: url,
-                        title: postTitle,
-                        description: postDescription,
-                    };
-
-                    if (doc.exists) {
-                        // if the document has been created
-
-                        let data = doc.data().posts;
-
-                        data.push(postObj);
-
-                        postsRef.update({
-                            posts: data,
-                        });
-                    } else {
-                        //set new value to the document
-
-                        postsRef
-                            .set({
-                                posts: [postObj],
-                            })
-
-                            .then()
-                            .catch((error) => console.error(error));
-                    }
-                });
-            } else {
-                //file is too big
-                setMessage(
-                    "File too big please choose a file smaller than 25 MB."
-                );
-            }
-
-            setMessage("Completed!");
-        } else {
-            setFileError("Please choose a file");
+            setFileName(file.name);
+            setFileError("");
         }
+    }, [file]);
+    const uploadFile = async () => {
+        setMessage("Please wait uploading file...");
+        // check if file is larger than 25 mb
+        if (file.size < 25000001) {
+            //ref for upliading file
+            var storageRef = firebase
+                .storage()
+                .ref(
+                    "test-org/posts/" +
+                        user?.id.toString() +
+                        "/" +
+                        Math.random().toString() +
+                        user?.id.toString() +
+                        file.name
+                );
+            await storageRef.put(file); // upload file
+
+            // ref for uploading post
+            const postsRef = firebase
+                .firestore()
+                .collection("organizations")
+                .doc("test-org")
+                .collection(user.id.toString())
+                .doc(user?.id.toString());
+
+            postsRef.get().then(async (doc) => {
+                const url = await storageRef.getDownloadURL();
+
+                const postObj = {
+                    user_id: user?.id,
+                    posted_time: Date.now().toString(),
+                    url: url,
+                    title: postTitle,
+                    description: postDescription,
+                };
+
+                if (doc.exists) {
+                    // if the document has been created
+
+                    let data = doc.data().posts;
+
+                    data.push(postObj);
+
+                    postsRef.update({
+                        posts: data,
+                    });
+                } else {
+                    //set new value to the document
+
+                    postsRef
+                        .set({
+                            posts: [postObj],
+                        })
+
+                        .then()
+                        .catch((error) => console.error(error));
+                }
+            });
+        } else {
+            //file is too big
+            setMessage("File too big please choose a file smaller than 25 MB.");
+        }
+
+        setMessage("Completed!");
     };
 
     function validateData() {
@@ -108,17 +110,24 @@ const UploadFile = () => {
         } else {
             validDescription = true;
         }
+
+        let validFile = false;
+        if (file) {
+            validFile = true;
+        } else {
+            setFileError("Please choose a file");
+        }
+
         if (postTitle.length < 10) {
             setTitleError("Title must be at least 10 characters");
         } else if (postTitle.length > 100) {
             setTitleError("Title must be less than 100 characters");
         } else {
-            if (validDescription) {
+            if (validDescription && validFile) {
                 return true;
-            } else {
-                return false;
             }
         }
+
         return false;
     }
 
@@ -171,22 +180,14 @@ const UploadFile = () => {
                     </p>
                 </div>
             </div>
-            <div className="md:flex md:items-center">
-                <div className="md:w-1/3"></div>
-                <div className="md:w-2/3" />
-            </div>
-            <br />
-
-            <div className="flex pb-10 font-sans text-center">
+            <div className="flex pb-3 font-sans text-center">
                 <label className={style.customFileUpload}>
                     <input
                         type="file"
                         multiple
-                        // @ts-ignore: Object is possibly 'null'.
                         onChange={(event) => setFile(event.target.files[0])}
                         ref={fileUploadRef}
                         className={style.file}
-                        required
                     />
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -205,10 +206,10 @@ const UploadFile = () => {
                     </svg>
                     Choose File
                 </label>
-
-                <p className="text-xs italic text-red-500">{fileError}</p>
             </div>
-            <p className="mt-0 mb-2 text-2xl font-normal leading-normal text-green-700">
+            <p className="text-xs italic text-gray-500">{fileName}</p>
+            <p className="text-xs italic text-red-500">{fileError}</p>
+            <p className="pt-4 mt-0 mb-2 text-2xl font-normal leading-normal text-green-700">
                 {message}
             </p>
             <button
