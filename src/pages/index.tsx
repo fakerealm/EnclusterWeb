@@ -28,12 +28,14 @@ const HomePage = () => {
                                         <br />
                                     </h1>
                                     <br />
-                                    <Link href={!user ? "/register" : "/"}>
+                                    <Link
+                                        href={!user ? "/register" : "/upload"}
+                                    >
                                         <a>
                                             <BigButton>
                                                 {!user
                                                     ? "Register Today!"
-                                                    : "Create an organization"}
+                                                    : "Upload A File"}
                                             </BigButton>
                                         </a>
                                     </Link>

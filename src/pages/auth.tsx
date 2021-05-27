@@ -1,7 +1,6 @@
 import FirebaseAuth from "../components/auth/FireBaseAuth";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import Footer from "../components/Footer";
 import firebase from "firebase";
 import "firebase/auth";
 import initFirebase from "../firebase/initFirebase";
