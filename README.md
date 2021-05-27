@@ -22,5 +22,9 @@ NEXT_PUBLIC_FIREBASE_APP_ID=
 yarn
 yarn dev
 ```
-## Production builds will be on [this repository](http://github.com/samrath2007/EnClusterWeb/)
-## Latest [build](https://en-cluster-web.vercel.app)
+### Authors
+- [samrath2757](https://github.com/samrath2007/) Founder And Developer Of EnCluster
+
+## [Latest deployed version](https://en-cluster-web.vercel.app)
+## [Source code for latest deployed version](https://github.com/samrath2007/enclusterWeb/)
+
