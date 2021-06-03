@@ -101,7 +101,7 @@ const UploadFile = () => {
 
     function validateData() {
         let validDescription = false;
-        if (postDescription.length < 30) {
+        if (postDescription.length < 10) {
             setDescriptionError("Description must be at least 30 characters");
         } else if (postDescription.length > 1000) {
             setDescriptionError(

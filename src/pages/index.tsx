@@ -28,9 +28,7 @@ const HomePage = () => {
                                         <br />
                                     </h1>
                                     <br />
-                                    <Link
-                                        href={!user ? "/register" : "/upload"}
-                                    >
+                                    <Link href={!user ? "/auth" : "/upload"}>
                                         <a>
                                             <BigButton>
                                                 {!user
