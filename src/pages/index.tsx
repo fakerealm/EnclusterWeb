@@ -74,20 +74,16 @@ const HomePage = () => {
                 </Link>
             </div>
             <div className={lpstyles.navlinks}>
-                <span className={lpstyles.navlink} >
-                    "Upload A File"
-                </span>
+                {user ?
+                    <span className={lpstyles.navlink} >
+                        Upload A File
+                </span> : <></>
+                }
 
                 <span className={lpstyles.navlogin}
                     onClick={() => {
-                        console.log(user)
-                        if (user) {
-                            logout().then(() => { }).catch((e) => {
-                                console.log(e)
-                            })
-                        } else {
+                        logout()
 
-                        }
                     }}
                 >
                     <Link href="/auth" >
