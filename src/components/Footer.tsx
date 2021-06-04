@@ -14,7 +14,7 @@ const Footer = () => (
                     Encluster
                 </a>
             </p>
-            <span className="inline-flex justify-center mt-4 sm:ml-auto sm:mt-0 sm:justify-start">
+            <span className="inline-flex justify-center mt-4 sm:ml-auto sm:mt-0 sm:justify-start hidden sm:block">
                 <a href="https://www.github.com/EnCluster">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

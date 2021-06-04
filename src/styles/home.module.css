@@ -1,0 +1,7 @@
+.about {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    user-select: none;
+    -webkit-user-select: none;
+}

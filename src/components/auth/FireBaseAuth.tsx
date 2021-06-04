@@ -1,3 +1,4 @@
+// @ts-nocheck
 import initFirebase from "../../firebase/initFirebase";
 import { useEffect, useState } from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
@@ -44,7 +45,6 @@ const FirebaseAuth = () => {
         <div>
             {renderAuth ? (
                 <StyledFirebaseAuth
-                // @ts-ignore
                     uiConfig={firebaseAuthConfig}
                     firebaseAuth={firebase.auth()}
                 />

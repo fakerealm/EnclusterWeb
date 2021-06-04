@@ -1,93 +1,65 @@
-import React, { useState } from "react";
-import lpstyles from "../styles/landingpage.module.css";
 import Link from "next/link";
+import { BigButton } from "../components/Button";
+import Nav from "../components/Nav";
 import { useUser } from "../firebase/useUser";
+import style from "../styles/home.module.css";
 
 const HomePage = () => {
-    const { user, logout } = useUser();
-    const [showOverlay, setShowOverlay] = useState<boolean>(false);
+    const { user } = useUser();
     return (
-        <div className={lpstyles.main}>
-            <div className={lpstyles.nav}>
-                <div className={lpstyles.navlogo}>
-                    <Link href="/">
-                        <a>
-                            <span className={lpstyles.navlogoText}>
-                                EnCluster
-                            </span>
-                        </a>
-                    </Link>
-                </div>
-                <div className={lpstyles.navlinks}>
-                    {user ? (
-                        <span className={lpstyles.navlink}>Upload A File</span>
-                    ) : (
-                        <></>
-                    )}
-
-                    <span
-                        className={lpstyles.navlogin}
-                        onClick={() => {
-                            logout();
-                        }}
-                    >
-                        <Link href="/auth">
-                            <a>{!user ? "Login/Register" : "Logout"}</a>
-                        </Link>
-                    </span>
-                    <div className={lpstyles.hamburger}>
-                        {!user ? (
-                            <Link href="/auth">
-                                <span className={lpstyles.mobileLogin}>
-                                    Login/Register
-                                </span>
-                            </Link>
-                        ) : (
-                            <img
-                                src="/assets/images/menu.png"
-                                alt=""
-                                onClick={() => {
-                                    setShowOverlay(true);
-                                }}
-                            />
-                        )}
-                    </div>
-                </div>
-            </div>
-            {showOverlay ? (
-                <div className={lpstyles.overlay}>
-                    <div className={lpstyles.cross}>
-                        <img
-                            src="/assets/images/cross.png"
-                            alt=""
-                            onClick={() => {
-                                setShowOverlay(false);
-                            }}
-                        />
-                    </div>
-                    <div className={lpstyles.links}>
-                        <div className={lpstyles.link}>
-                            <span>Upload A File</span>
+        <>
+            <div className="flex flex-col h-screen">
+                <Nav color="bg-gray-900" showSecondaryNav={true} />
+                <main className="flex-1 overflow-y-auto bg-blue-50">
+                    <div>
+                        <div className="pt-16 mx-auto max-w-screen-lg">
+                            <div className="mb-12 text-center">
+                                <header className="text-center">
+                                    <h1 className="font-bold text-gray-900 whitespace-pre-line leading-hero">
+                                        <span className=" text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-green-500 text-6xl">
+                                            Encluster
+                                        </span>
+                                        <br />
+                                        <span className="p-12 text-gray-700 text-2xl sm:text-3xl md:text-4xl md:text-gray-700">
+                                            Share notes rapidly
+                                        </span>
+                                        <br />
+                                    </h1>
+                                    <br />
+                                    <Link href={!user ? "/auth" : "/upload"}>
+                                        <a>
+                                            <BigButton>
+                                                {!user
+                                                    ? "Register Today!"
+                                                    : "Upload A File"}
+                                            </BigButton>
+                                        </a>
+                                    </Link>
+                                </header>
+                            </div>
                         </div>
-                        <div className={lpstyles.link}>
-                            <span>Logout</span>
+                        <div className="px-3 mx-auto max-w-screen-lg">
+                            <div className={`mb-12 text-center ${style.about}`}>
+                                <img
+                                    src="/assets/images/online-learning.png"
+                                    alt=""
+                                    className="hidden md:block object-scale-down h-80"
+                                />
+                                <div className="w-96">
+                                    <h1 className="text-3xl">About us</h1>
+                                    <p className={`text-lg ${style.about}`}>
+                                        EnCluster is an open source platform
+                                        aimed to make note sharing fast and
+                                        easy. We aim to make it easier and
+                                        faster to find and share notes.
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            ) : (
-                <></>
-            )}
-            <div className={lpstyles.content}>
-                <div className={lpstyles.header}>
-                    <span className={lpstyles.title}>EnCluster</span>
-                </div>
-                <div className={lpstyles.about}>
-                    <span className={lpstyles.tagline}>
-                        Share notes rapidly
-                    </span>
-                </div>
+                </main>
             </div>
-        </div>
+        </>
     );
 };
 
