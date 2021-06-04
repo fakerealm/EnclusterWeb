@@ -1,10 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;1,100&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200;300;400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap");
 
 .main {
+    box-sizing: border-box;
+    font-family: "DM Serif Display", serif;
     height: 100vh;
-    width: 100vw;
+    font-family: "DM Serif Display", serif;
 }
 /*
 Navbar
@@ -19,11 +20,11 @@ Navbar
     user-select: none;
     -webkit-user-select: none;
     border-bottom-right-radius: 5%;
-    background-color: rgb(245, 245, 245);
+    padding-top: 20px;
 }
 .nav .navlogo .navlogoText {
-    font-size: 25px;
-    font-family: Lato, sans-serif;
+    font-size: 30px;
+    font-family: "Dosis", sans-serif;
 }
 
 .navlinks {
@@ -36,20 +37,34 @@ Navbar
 
 .navlinks span {
     font-family: "Roboto", sans-serif;
-    font-size: 17px;
-    margin: 10px;
+    margin: 15px;
+}
+
+.navlink {
+    font-size: 22px;
+    padding-top: 8px;
 }
 
 .navlogin {
-    background-color: rgba(0, 118, 255, 0.9);
-    color: #fff;
-    border: 1px solid rgba(0, 118, 255, 0.9);
-    padding: 0.25rem 1rem;
-    margin: 0;
-    border-radius: 7px;
-    cursor: pointer;
+    font-size: 25px;
+    font-weight: 300;
+    padding-top: 10px;
+    border-bottom: solid 3px #000;
 }
+
 .navlogin:hover {
-    background-color: rgba(0, 102, 218, 0.9);
-    color: #fff;
+    padding-top: 5px;
+    border-bottom: none;
+}
+.overlay {
+    position: fixed; /* Sit on top of the page content */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000; /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
 }
