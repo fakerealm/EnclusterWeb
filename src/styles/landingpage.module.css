@@ -6,7 +6,7 @@
     font-family: "DM Serif Display", serif;
     height: 100vh;
     font-family: "DM Serif Display", serif;
-    background: #d9d9d9;
+    background: #fff;
 }
 /*
 Navbar
@@ -111,6 +111,17 @@ Navbar
     background-color: #000; /* Black background with opacity */
     z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
     cursor: pointer; /* Add a pointer on hover */
+    animation-name: custom-fadein;
+    animation-duration: 0.75s;
+}
+
+@keyframes custom-fadein {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 
 .overlay {
