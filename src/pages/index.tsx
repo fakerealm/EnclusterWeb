@@ -32,30 +32,47 @@ const HomePage = () => {
                         }}
                     >
                         <Link href="/auth">
-                            <a>{!user ? "Register Today!" : "Logout"}</a>
+                            <a>{!user ? "Login/Register" : "Logout"}</a>
                         </Link>
                     </span>
+                    <div className={lpstyles.hamburger}>
+                        {!user ? (
+                            <Link href="/auth">
+                                <span className={lpstyles.mobileLogin}>
+                                    Login/Register
+                                </span>
+                            </Link>
+                        ) : (
+                            <img
+                                src="/assets/images/menu.png"
+                                alt=""
+                                onClick={() => {
+                                    setShowOverlay(true);
+                                }}
+                            />
+                        )}
+                    </div>
                 </div>
             </div>
-            <button
-                onClick={() => {
-                    setShowOverlay(true);
-                }}
-            >
-                Hi
-            </button>
             {showOverlay ? (
                 <div className={lpstyles.overlay}>
-                    <button
-                        style={{
-                            color: "#fff",
-                        }}
-                        onClick={() => {
-                            setShowOverlay(false);
-                        }}
-                    >
-                        Hi
-                    </button>
+                    <div className={lpstyles.cross}>
+                        <img
+                            src="/assets/images/cross.png"
+                            alt=""
+                            onClick={() => {
+                                setShowOverlay(false);
+                            }}
+                        />
+                    </div>
+                    <div className={lpstyles.links}>
+                        <div className={lpstyles.link}>
+                            <span>Upload A File</span>
+                        </div>
+                        <div className={lpstyles.link}>
+                            <span>Logout</span>
+                        </div>
+                    </div>
                 </div>
             ) : (
                 <></>
