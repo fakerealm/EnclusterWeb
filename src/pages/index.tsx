@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Link from "next/link";
 import { BigButton } from "../components/Button";
 import Nav from "../components/Nav";
@@ -6,6 +7,8 @@ import style from "../styles/home.module.css";
 
 const HomePage = () => {
     const { user } = useUser();
+    const [showOverlay, setShowOverlay] = useState<boolean>(false);
+
     return (
         <>
             <div className="flex flex-col h-screen">
@@ -43,7 +46,7 @@ const HomePage = () => {
                                 <img
                                     src="/assets/images/online-learning.png"
                                     alt=""
-                                    className="hidden md:block object-scale-down h-80"
+                                    className={`hidden md:block object-scale-down h-80 ${style.onlineLearningImg}`}
                                 />
                                 <div className="w-96">
                                     <h1 className="text-3xl">About us</h1>
