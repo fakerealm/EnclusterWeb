@@ -77,6 +77,16 @@ const HomePage = () => {
             ) : (
                 <></>
             )}
+            <div className={lpstyles.content}>
+                <div className={lpstyles.header}>
+                    <span className={lpstyles.title}>EnCluster</span>
+                </div>
+                <div className={lpstyles.about}>
+                    <span className={lpstyles.tagline}>
+                        Share notes rapidly
+                    </span>
+                </div>
+            </div>
         </div>
     );
 };

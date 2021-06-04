@@ -6,6 +6,7 @@
     font-family: "DM Serif Display", serif;
     height: 100vh;
     font-family: "DM Serif Display", serif;
+    background: #d9d9d9;
 }
 /*
 Navbar
@@ -90,6 +91,15 @@ Navbar
     }
 }
 
+@media (max-width: 480) {
+    .mobileLogin {
+        font-size: 17px;
+    }
+    .nav .navlogo .navlogoText {
+        font-size: 25px;
+    }
+}
+
 .overlay {
     position: fixed; /* Sit on top of the page content */
     width: 100%; /* Full width (cover the whole page) */
@@ -130,4 +140,19 @@ Navbar
 
 .link span:hover {
     border-bottom: none;
+}
+
+.content {
+    text-align: center;
+}
+
+.header {
+    padding-top: 25vh;
+    font-family: "Dosis", sans-serif;
+    font-size: 50px;
+}
+
+.tagline {
+    font-size: 35px;
+    font-family: "Roboto", sans-serif;
 }
