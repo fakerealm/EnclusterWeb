@@ -4,7 +4,6 @@ import { useUser } from "../firebase/useUser";
 
 type INavbarProps = {
     color: string;
-    showSecondaryNav: boolean;
 };
 
 export default function Nav(props: INavbarProps) {
@@ -27,53 +26,48 @@ export default function Nav(props: INavbarProps) {
                                 </Link>
                             </div>
                             {/* primary nav */}
-                            <div className="items-center hidden md:flex spacex-1">
-                                <Link href="/about">
-                                    <a className="px-3 py-5 text-gray-100 hover:text-gray-300">
-                                        About
+                        </div>
+                        {user ? (
+                            <>
+                                <div className="items-center hidden md:flex space-x-1 absolute right-0 pt-6 pr-3">
+                                    <a
+                                        className="font-bold text-gray-100 border-b-2 bored-white hover:border-b-0"
+                                        onClick={logout}
+                                    >
+                                        Logout
+                                    </a>
+                                </div>
+                            </>
+                        ) : (
+                            /* secondary nav */
+                            <div className="items-center hidden md:flex space-x-1 absolute right-0 pt-6pr-3">
+                                <Link href="/auth">
+                                    <a className="font-bold text-gray-100 border-b-2 bored-white hover:border-b-0 pr-3">
+                                        Login/Register
                                     </a>
                                 </Link>
                             </div>
-                        </div>
-                        {props.showSecondaryNav ? (
-                            user ? (
-                                <>
-                                    <div className="items-center hidden md:flex space-x-1">
-                                        <a
-                                            className="px-3 py-5 font-bold text-gray-100 hover:text-gray-300"
-                                            onClick={logout}
-                                        >
-                                            Logout
-                                        </a>
-                                    </div>
-                                </>
-                            ) : (
-                                /* secondary nav */
-                                <div className="items-center hidden md:flex space-x-1">
-                                    <Link href="/auth">
-                                        <a className="px-3 py-5 font-bold text-gray-100 hover:text-gray-300">
-                                            Login/Register
-                                        </a>
-                                    </Link>
-                                </div>
-                            )
-                        ) : (
-                            <></>
                         )}
-                        {/* mobile button goes here */}
+                        ){/* mobile button goes here */}
                         <div className="flex items-center md:hidden lg:hidden">
-                            <button
-                                className="mobile-menu-button"
-                                onClick={() => {
-                                    setToggleMobile(!toggleMobile);
-                                }}
-                            >
-                                <img
-                                    src="assets/images/menu.png"
-                                    className="object-scale-down h-12"
-                                    alt=""
-                                />
-                            </button>
+                            {user ? (
+                                <button
+                                    className="mobile-menu-button"
+                                    onClick={() => {
+                                        setToggleMobile(!toggleMobile);
+                                    }}
+                                >
+                                    <img
+                                        src="assets/images/menu.png"
+                                        className="object-scale-down h-12"
+                                        alt=""
+                                    />
+                                </button>
+                            ) : (
+                                <a href="/auth" className="text-white">
+                                    Login/Register
+                                </a>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -85,33 +79,14 @@ export default function Nav(props: INavbarProps) {
                             : "hidden"
                     }
                 >
-                    <Link href="/about">
-                        <a className="block px-4 py-2 text-xl text-gray-100 hover:text-gray-300 hover:bg-blue-500">
-                            About
+                    <>
+                        <a
+                            className="block px-4 py-2 text-xl text-gray-100 hover:text-gray-300 hover:bg-blue-500"
+                            onClick={logout}
+                        >
+                            Logout
                         </a>
-                    </Link>
-                    {props.showSecondaryNav ? (
-                        user ? (
-                            <>
-                                <a
-                                    className="block px-4 py-2 text-xl text-gray-100 hover:text-gray-300 hover:bg-blue-500"
-                                    onClick={logout}
-                                >
-                                    Logout
-                                </a>
-                            </>
-                        ) : (
-                            <>
-                                <Link href="/auth">
-                                    <a className="block px-4 py-2 text-xl text-gray-100 hover:text-gray-300 hover:bg-blue-500">
-                                        Login/Register
-                                    </a>
-                                </Link>
-                            </>
-                        )
-                    ) : (
-                        <></>
-                    )}
+                    </>
                 </div>
             </nav>
         </div>

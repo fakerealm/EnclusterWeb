@@ -7,12 +7,11 @@ import style from "../styles/home.module.css";
 
 const HomePage = () => {
     const { user } = useUser();
-    const [showOverlay, setShowOverlay] = useState<boolean>(false);
 
     return (
         <>
             <div className="flex flex-col h-screen">
-                <Nav color="bg-gray-900" showSecondaryNav={true} />
+                <Nav color="bg-gray-900" />
                 <main className="flex-1 overflow-y-auto bg-blue-50">
                     <div>
                         <div className="pt-16 mx-auto max-w-screen-lg">
@@ -58,6 +57,13 @@ const HomePage = () => {
                                     </p>
                                 </div>
                             </div>
+                        </div>
+                        <div>
+                            <img
+                                src="/assets/images/online-learning.png"
+                                alt=""
+                                className="md:hidden object-scale-down h-80 mx-auto"
+                            />
                         </div>
                     </div>
                 </main>
