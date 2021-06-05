@@ -40,9 +40,9 @@ export default function Nav(props: INavbarProps) {
                             </>
                         ) : (
                             /* secondary nav */
-                            <div className="items-center hidden md:flex space-x-1 absolute right-0 pt-6pr-3">
+                            <div className="items-center hidden md:flex space-x-1 absolute right-0 pt-6 pr-3">
                                 <Link href="/auth">
-                                    <a className="font-bold text-gray-100 border-b-2 bored-white hover:border-b-0 pr-3">
+                                    <a className="font-bold text-gray-100 border-b-2 bored-white hover:border-b-0">
                                         Login/Register
                                     </a>
                                 </Link>
